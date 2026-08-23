@@ -1,5 +1,5 @@
-#Dalaota_Start
+# Dalaota_StudentProfile
 
 
-#Screenshot
-![Cordova App]()![Screenshot 2026-08-23 090522.png](Screenshot%202026-08-23%20090522.png)
+
+![Screenshot 2026-08-23 192803.png](www/img/Screenshot%202026-08-23%20192803.png)

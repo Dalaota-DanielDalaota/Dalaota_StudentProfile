@@ -1,50 +1,102 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<body>
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-            https://cordova.apache.org/docs/en/latest/
-        Some notes:
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+<header>
+    <div class="profile-picture">
+        <img src="img/profile.jpeg" alt="Profile Picture">
+    </div>
+
+    <h1>John Daniel Dalaota</h1>
+    <p>About Myself</p>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+    </nav>
+</header>
+
+<main>
+
+    <section id="about">
+        <h2>About Me</h2>
+
+        <p>
+            I am John Daniel Dalaota,a 3rd year BSIT student who enjoys learning new
+            technologies and developing my skills in information technology.
+            I am interested in computers, software development, and exploring
+            how technology can be used to solve everyday problems.
+        </p>
+
+        <p>
+            I am currently pursuing my education in Information Technology.
+            My goal is to continue improving my technical knowledge and gain
+            valuable experience that will help me build a successful career
+            in the technology industry.
+        </p>
+
+        <div class="info-box">
+            <h3>Interests</h3>
+            <p>Web development, technology, programming, and learning new skills.</p>
         </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+
+        <div class="info-box">
+            <h3>Educational Background</h3>
+            <p>Currently pursuing a college degree in Information Technology.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Goals</h3>
+            <p>
+                My goal is to become a skilled IT professional and contribute
+                to meaningful technology projects in the future.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>My Skills</h2>
+
+        <div class="skill">
+            <h3>HTML</h3>
+            <p>Ability to create and organize the structure of web pages.</p>
+        </div>
+
+        <div class="skill">
+            <h3>CSS</h3>
+            <p>Ability to style webpages and create clean visual layouts.</p>
+        </div>
+
+        <div class="skill">
+            <h3>Programming</h3>
+            <p>Understanding of basic programming concepts and problem solving.</p>
+        </div>
+
+        <div class="skill">
+            <h3>Database Management</h3>
+            <p>Basic knowledge of organizing, managing, and working with databases.</p>
+        </div>
+
+        <div class="skill">
+            <h3>Teamwork</h3>
+            <p>Ability to collaborate with others and contribute to group projects.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 John Daniel Dalaota. All Rights Reserved.</p>
+</footer>
+
+</body>
 </html>
+```

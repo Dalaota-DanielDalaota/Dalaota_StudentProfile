@@ -120,30 +120,16 @@ The generated APK can be found in:
 ## 7. Application Screenshots
 
 ### Desktop View
-
-![Desktop View](desktop.png)
-
-### Tablet View
-
-![Tablet View](tablet.png)
-
-*Tested using Google Chrome responsive/device emulation.*
-
-### Mobile View
-
-![Mobile View](mobile.png)
-
-
-
-
-### Desktop View
 ![Screenshot 2026-09-02 200652.png](www/img/Screenshot%202026-09-02%20200652.png)
 
 
 ### Tablet View
 ![Screenshot 2026-09-02 200638.png](www/img/Screenshot%202026-09-02%20200638.png)
 
+*Tested using Google Chrome responsive/device emulation.*
 
 
 ### Mobile view
 ![Screenshot 2026-09-02 200439.png](www/img/Screenshot%202026-09-02%20200439.png)
+
+*Tested using Google Chrome responsive/device emulation.*

@@ -136,7 +136,7 @@ The generated APK can be found in:
 
 ---
 
-# Activity 4 - Multi-Page Responsive Student Portfolio
+# Activity 4 - Multi-Page Student Portfolio
 
 ## 1. Project Description
 
@@ -289,6 +289,7 @@ The generated APK can be found in:
 
 ![Activity 4 - Tablet.png](www/img/Activity%204%20-%20Tablet.png)
 
-*The Desktop and Tablet screenshots demonstrate the responsive layout at different screen sizes.*
+*The Desktop and Tablet screenshots demonstrate the responsive layout at different screen sizes. Due to limitations with running a tablet Android emulator on my computer, the Tablet view was tested using Google Chrome's responsive/device emulation instead.*
+
 ```
 

@@ -136,7 +136,7 @@ The generated APK can be found in:
 
 ---
 
-# Activity 4 - Multi-Page Student Portfolio
+# Activity 4 - Multi-Page Student Profile
 
 ## 1. Project Description
 

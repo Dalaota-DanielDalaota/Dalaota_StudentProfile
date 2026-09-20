@@ -14,8 +14,10 @@
         <img src="img/profile.jpeg" alt="Profile Picture">
     </div>
 
-    <h1>John Daniel Dalaota</h1>
-    <p>BSIT Student | Aspiring IT Professional</p>
+    <h1 id="headerName">John Daniel Dalaota</h1>
+    <p id="headerCourse">BSIT Student | Aspiring IT Professional</p>
+
+    <button id="editProfileBtn">Edit Profile</button>
 
     <nav>
         <a href="index.html">Profile</a>
@@ -28,13 +30,24 @@
 
 <main>
 
-    <section>
+    <section id="profileView">
         <h2>Welcome to My Profile</h2>
 
-        <p>
+        <h3 id="displayName">John Daniel Dalaota</h3>
+
+        <p id="displayCourse">BS Information Technology</p>
+        <p id="displayYear">3rd Year</p>
+
+        <p id="displayAbout">
             Hello! I am John Daniel Dalaota, a 3rd year BSIT student
             interested in technology, programming, web development,
             and learning new skills.
+        </p>
+
+        <h3>Skills</h3>
+
+        <p id="displaySkills">
+            HTML, CSS, JavaScript, and basic programming.
         </p>
 
         <p>
@@ -44,12 +57,40 @@
         </p>
     </section>
 
+    <section id="editProfileForm" style="display: none;">
+        <h2>Edit Profile</h2>
+
+        <form id="profileForm">
+
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName">
+
+            <label for="course">Course / Program</label>
+            <input type="text" id="course" name="course">
+
+            <label for="yearLevel">Year Level</label>
+            <input type="text" id="yearLevel" name="yearLevel">
+
+            <label for="aboutMe">About Me</label>
+            <textarea id="aboutMe" name="aboutMe"></textarea>
+
+            <label for="skills">Skills</label>
+            <textarea id="skills" name="skills"></textarea>
+
+            <button type="submit">Save</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+
+        </form>
+    </section>
+
 </main>
 
 <footer>
     <p>&copy; 2026 John Daniel Dalaota. All Rights Reserved.</p>
 </footer>
 
+<script src="js/profile.js"></script>
+
 </body>
 </html>
-
+```

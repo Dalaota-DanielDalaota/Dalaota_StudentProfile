@@ -293,3 +293,160 @@ The generated APK can be found in:
 
 ```
 
+# Activity 5 - Profile Editing and Local Storage
+
+## 1. Project Description
+
+This project is an extension of my responsive multi-page Student Profile from Activity 4. In Activity 5, I added JavaScript functionality that allows users to edit and update profile information directly through the application.
+
+The application remains an Apache Cordova project and continues to use the same GitHub repository and five-page structure from the previous activities. The new functionality includes an Edit Profile form, JavaScript validation, dynamic profile updates, Save and Cancel buttons, and local storage for saving profile information.
+
+---
+
+## 2. Application Pages
+
+### Profile
+
+The Profile page serves as the homepage and main entry point of the application. It displays my profile picture, name, course, year level, About Me information, and skills. It also contains the new **Edit Profile** button that allows the displayed profile information to be modified.
+
+### About
+
+The About page contains information about myself, including my personal introduction, interests, educational background, and goals and aspirations.
+
+### Skills
+
+The Skills page presents my skills and provides a short description of each skill.
+
+### Projects
+
+The Projects page showcases the projects I have worked on and provides information about each project.
+
+### Contact
+
+The Contact page provides my email address, GitHub profile, Facebook profile, and other relevant contact information.
+
+---
+
+## 3. Profile Editing
+
+The Profile page includes an **Edit Profile** button. When the button is clicked, the normal profile view is replaced by an editing form.
+
+The Edit Profile form allows the user to modify the following information:
+
+* Full Name
+* Course / Program
+* Year Level
+* About Me
+* Skills
+
+After entering new information, the user can select **Save** to apply the changes or **Cancel** to discard them.
+
+---
+
+## 4. JavaScript Functionality
+
+JavaScript is used to control the Edit Profile form and dynamically update the profile information.
+
+### Form Handling
+
+JavaScript detects when the Edit Profile button, Save button, and Cancel button are clicked. It also retrieves the values entered into the form fields.
+
+### Validation
+
+Before saving, JavaScript checks that the required fields are not empty. The required fields are Full Name, Course / Program, Year Level, and About Me. If any required field is empty, the application displays a validation message and prevents the profile from being saved.
+
+### Profile Updates
+
+When valid information is submitted, JavaScript updates the displayed profile information without requiring manual changes to the HTML file.
+
+### Save
+
+The Save button stores the updated profile information in `localStorage` and immediately displays the new information on the Profile page.
+
+### Cancel
+
+The Cancel button closes the editing form and returns to the previous profile information without saving the changes.
+
+---
+
+## 5. Local Data Storage
+
+The application uses the browser's `localStorage` to store the user's profile information.
+
+The following information is stored:
+
+* Full Name
+* Course / Program
+* Year Level
+* About Me
+* Skills
+
+When the application starts, JavaScript checks `localStorage` for previously saved information. If saved information exists, it is retrieved and displayed automatically.
+
+If no saved information exists, the application displays the default profile information. This allows the profile to have initial content even when the user has not made any edits.
+
+The saved information remains available after refreshing or closing and reopening the application.
+
+---
+
+## 6. Responsive Design
+
+The Activity 5 application continues to use the responsive design developed in the previous activities.
+
+CSS media queries and flexible layouts allow the application to adjust to different screen sizes:
+
+* **Desktop** – The profile and editing form are displayed using the larger available screen space.
+* **Tablet** – Spacing, font sizes, and layout adjust to fit a medium-sized screen.
+* **Mobile** – The layout changes to fit smaller screens, including a vertically arranged navigation menu and appropriately sized form elements.
+
+This allows the Profile and Edit Profile interfaces to remain usable across Desktop, Tablet, and Mobile devices.
+
+---
+
+## 7. How to Run
+
+### Requirements
+
+* Node.js and npm
+* Apache Cordova
+* Android Studio
+* Android SDK
+* JDK
+
+### Steps
+
+1. Clone or download the repository.
+2. Open the project folder in a terminal.
+3. Run `npm install` if needed.
+4. Build the Android application using:
+
+`cordova build android`
+
+5. Run the application using an Android emulator or Android device:
+
+`cordova run android`
+
+The generated APK can be found in:
+
+`platforms/android/app/build/outputs/apk/debug/app-debug.apk`
+
+---
+
+## 8. Application Screenshots
+
+### Student Profile
+
+![Act 5 - Student Profile.png](www/img/Act%205%20-%20Student%20Profile.png)
+
+### Edit Profile
+
+![Act 5 - Edit Profile.png](www/img/Act%205%20-%20Edit%20Profile.png)
+
+### Updated Profile
+
+![Act 5 - Updated Profile.png](www/img/Act%205%20-%20Updated%20Profile.png)
+
+### Contact
+
+![Act 5 - Contact.png](www/img/Act%205%20-%20Contact.png)
+

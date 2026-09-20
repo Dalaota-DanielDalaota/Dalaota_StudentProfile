@@ -291,7 +291,7 @@ The generated APK can be found in:
 
 *The Desktop and Tablet screenshots demonstrate the responsive layout at different screen sizes. Due to limitations with running a tablet Android emulator on my computer, the Tablet view was tested using Google Chrome's responsive/device emulation instead.*
 
-```
+
 
 # Activity 5 - Profile Editing and Local Storage
 

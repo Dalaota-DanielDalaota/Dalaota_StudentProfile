@@ -10,4 +10,9 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+
+    <config-file target="AndroidManifest.xml" parent="/*"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <uses-permission android:name="android.permission.CAMERA" />
+    </config-file>
 </widget>

@@ -256,5 +256,26 @@ footer p {
     footer {
         padding: 18px 15px;
         font-size: 14px;
+
+
+        #changeProfilePictureBtn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #20639b;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #changeProfilePictureBtn:hover {
+            opacity: 0.9;
+        }
+
+
+
+
+
     }
 }

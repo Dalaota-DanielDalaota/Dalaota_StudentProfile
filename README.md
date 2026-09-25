@@ -450,3 +450,351 @@ The generated APK can be found in:
 
 ![Act 5 - Contact.png](www/img/Act%205%20-%20Contact.png)
 
+---
+
+# Activity 6
+
+A Cordova-based Student Profile mobile application developed as part of the ITCC activities. The application allows users to view student information, edit their profile, manage skills, and update their profile picture using the device camera.
+
+## Project Description
+
+The Student Profile application is a responsive Cordova mobile application that presents student information through multiple pages. It also provides profile editing functionality using JavaScript and `localStorage`, as well as device camera integration for changing the profile picture.
+
+The project was developed using HTML, CSS, JavaScript, Apache Cordova, Android Studio, and the Cordova Camera plugin.
+
+## Application Pages
+
+The application contains the following pages:
+
+* **Profile** – Displays the student's profile information and profile picture.
+* **About** – Displays information about the student.
+* **Skills** – Displays the student's skills and abilities.
+* **Projects** – Displays the student's projects and related information.
+* **Contact** – Provides the student's contact information.
+
+## Profile Editing and Local Storage
+
+The Profile page includes an **Edit Profile** feature that allows the user to modify their:
+
+* Full Name
+* Course
+* Year Level
+* About Me
+* Skills
+
+The application uses JavaScript validation to make sure required fields are completed before saving.
+
+When the user selects **Save**, the updated profile information is stored using browser/client-side `localStorage`. This allows the information to remain available after the application is restarted.
+
+The **Cancel** button exits the editing form without saving new changes.
+
+## Camera Integration
+
+Activity 6 adds an interactive profile picture feature using the device camera.
+
+The application uses the **`cordova-plugin-camera`** plugin to access the Android device camera.
+
+### Camera Workflow
+
+1. The user selects **Change Profile Picture**.
+2. The Cordova Camera plugin requests camera access when necessary.
+3. The device camera opens.
+4. The user captures a photo.
+5. The camera returns the captured image to the application.
+6. The image is displayed as the new profile picture.
+7. The captured image is stored in `localStorage`.
+8. When the application is opened again, the saved image is loaded and displayed.
+
+The project uses the following camera configuration:
+
+* JPEG image format
+* Image quality of 60
+* Maximum target size of 500 × 500 pixels
+* Correct image orientation
+* Photo is not automatically saved to the device photo album
+
+## Device Feature Integration
+
+The application communicates with the Android device through Apache Cordova and the `cordova-plugin-camera` plugin.
+
+JavaScript calls the Cordova camera API:
+
+```javascript
+navigator.camera.getPicture()
+```
+
+Cordova then communicates with the native Android camera functionality. After the user captures an image, the camera plugin returns the image data to the JavaScript success callback.
+
+The returned image data is then assigned to the profile image:
+
+```javascript
+document.getElementById("profileImage").src = imageData;
+```
+
+The same image data is also saved to client-side storage:
+
+```javascript
+localStorage.setItem("profileImage", imageData);
+```
+
+## Image Handling and Persistence
+
+The application uses the camera image returned by the Cordova Camera plugin as the new profile picture.
+
+The captured image is stored using:
+
+```javascript
+localStorage.setItem("profileImage", imageData);
+```
+
+When the application starts, it checks whether a previously saved profile image exists:
+
+```javascript
+const savedProfileImage = localStorage.getItem("profileImage");
+```
+
+If an image is found, it is loaded into the profile picture element.
+
+This allows the captured profile picture to remain available after the application is closed and reopened.
+
+Taking another picture replaces the previously saved profile picture.
+
+If the user cancels the camera operation, the existing profile picture remains unchanged.
+
+## Error Handling
+
+The application includes error handling for camera-related problems.
+
+### Camera Permission
+
+If camera permission is required, Android requests permission from the user before camera access is provided.
+
+### Camera Cancellation
+
+If the user cancels or exits the camera without taking a picture, the application keeps the existing profile picture and returns to the profile page without crashing.
+
+### Camera Errors
+
+If the camera cannot be accessed, the application displays an error message asking the user to check camera permissions and try again.
+
+The application uses a failure callback from `navigator.camera.getPicture()` to handle camera errors.
+
+## Responsive Design
+
+The application uses a shared CSS stylesheet to provide a responsive interface across different screen sizes.
+
+The pages are designed to remain usable on:
+
+* Mobile devices
+* Tablets
+* Desktop screens
+
+The same project and repository contain all application pages and shared styling.
+
+## Project Technologies
+
+* HTML5
+* CSS3
+* JavaScript
+* Apache Cordova
+* Android
+* Android Studio
+* Gradle
+* `cordova-plugin-camera`
+* `localStorage`
+* Git and GitHub
+
+## Dependencies
+
+The project requires:
+
+* Node.js
+* Apache Cordova CLI
+* Android Studio
+* Android SDK
+* Android SDK Platform Tools
+* Java Development Kit (JDK)
+* Gradle
+* Android device or Android emulator
+
+### Cordova Camera Plugin
+
+The camera functionality requires:
+
+```text
+cordova-plugin-camera
+```
+
+Install the plugin with:
+
+```cmd
+cordova plugin add cordova-plugin-camera
+```
+
+To verify installed Cordova plugins:
+
+```cmd
+cordova plugin ls
+```
+
+## How to Run
+
+### 1. Clone the Repository
+
+Clone the project repository from GitHub.
+
+### 2. Open the Project
+
+Open the project folder in Android Studio or a terminal.
+
+### 3. Install Cordova Dependencies
+
+Run:
+
+```cmd
+cordova prepare android
+```
+
+This prepares the Android platform and synchronizes the Cordova configuration, plugins, and application files.
+
+### 4. Connect an Android Device
+
+Enable the following on the Android device:
+
+* Developer Options
+* USB Debugging
+* Install via USB
+
+Connect the Android device to the computer using USB.
+
+Verify the device with:
+
+```cmd
+adb devices
+```
+
+The device should appear with the status:
+
+```text
+device
+```
+
+### 5. Build and Run
+
+Run:
+
+```cmd
+cordova run android --device
+```
+
+Cordova will build the Android application, install it on the connected device, and launch the application.
+
+## Screenshots
+
+### 1. Student Profile & Change Profile Picture
+
+Shows the main Student Profile page and Change Profile Picture Button.
+
+![Act 6 - Change Profile.jpg](www/img/Act%206%20-%20Change%20Profile.jpg)
+
+### 2. Camera
+
+Shows the Android device camera opened through the application.
+
+![Act 6 - Camera.jpg](www/img/Act%206%20-%20Camera.jpg)
+
+### 3. Captured Image
+
+Shows the captured image after returning from the device camera.
+
+![Act 6 - Captured Image.jpg](www/img/Act%206%20-%20Captured%20Image.jpg)
+
+### 4. Updated Profile Picture
+
+Shows the newly captured image displayed as the student's profile picture.
+
+![Act 6 - Updated Profile.jpg](www/img/Act%206%20-%20Updated%20Profile.jpg)
+
+## Activity 5 Functionality Retained
+
+The Activity 6 version continues to include the functionality implemented in Activity 5:
+
+* Student Profile
+* About
+* Skills
+* Projects
+* Contact
+* Edit Profile
+* Save Profile
+* Cancel Editing
+* JavaScript validation
+* Profile information persistence using `localStorage`
+
+Activity 6 extends the existing application by adding device camera integration without removing the previous functionality.
+
+## GitHub Workflow
+
+Activity 6 was developed using a separate Git branch before being merged into the `main` branch.
+
+Workflow:
+
+```text
+main
+  ↓
+activity-6-camera
+  ↓
+Activity 6 development and testing
+  ↓
+Pull Request
+  ↓
+main
+```
+
+The `activity-6-camera` branch is retained after merging.
+
+## Testing
+
+The following Activity 6 functions were tested on an Android device:
+
+* Camera opens successfully
+* Profile picture can be captured
+* Captured image is displayed
+* A new photo replaces the previous photo
+* Camera cancellation keeps the existing photo
+* Profile picture persists after application restart
+* Existing Activity 5 profile editing functionality remains functional
+* Camera permission and error handling are implemented
+
+## Repository Structure
+
+```text
+Dalaota_StudentProfile/
+│
+├── www/
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   └── profile.js
+│   │
+│   ├── img/
+│   │   └── profile.jpeg
+│   │
+│   ├── index.html
+│   ├── about.html
+│   ├── skills.html
+│   ├── projects.html
+│   └── contact.html
+│
+├── config.xml
+├── package.json
+├── README.md
+└── platforms/
+```
+
+## Author
+
+**John Daniel Dalaota**
+
+BSIT Student
+

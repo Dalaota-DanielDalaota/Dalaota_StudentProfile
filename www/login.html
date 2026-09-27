@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<main>
+    <section>
+        <h2>Student Login</h2>
+
+        <form id="loginForm">
+
+            <label for="loginIdentifier">
+                Student ID or Email
+            </label>
+
+            <input
+                    type="text"
+                    id="loginIdentifier"
+                    name="loginIdentifier"
+                    required
+            >
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                    type="password"
+                    id="loginPassword"
+                    name="loginPassword"
+                    required
+            >
+
+            <button type="submit">Login</button>
+
+            <p id="loginError"></p>
+
+        </form>
+    </section>
+</main>
+
+<script src="cordova.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="js/login.js"></script>
+
+</body>
+</html>

@@ -798,3 +798,313 @@ Dalaota_StudentProfile/
 
 BSIT Student
 
+---
+
+# Activity 7 - Database and Authentication
+
+## 1. Project Description
+
+This project is an extension of my Student Profile application from the previous activities. In Activity 7, the application was improved into a database-driven application with user authentication and profile management.
+
+The application now uses Supabase Authentication and a PostgreSQL database to authenticate users and store student profile information. The existing profile editing and camera functionality from the previous activities was also retained and integrated with the database.
+
+---
+
+## 2. Application Pages
+
+The application contains the following pages:
+
+### Profile
+
+The Profile page displays the authenticated student's profile information, including their name, course, year level, About Me information, skills, and profile picture. It also provides the Edit Profile, Change Profile Picture, and Logout functions.
+
+### About
+
+The About page provides information about the student, including their introduction, interests, educational background, and goals.
+
+### Skills
+
+The Skills page displays the student's skills and descriptions.
+
+### Projects
+
+The Projects page showcases the student's projects and related information.
+
+### Contact
+
+The Contact page provides the student's contact information and relevant links.
+
+### Login
+
+The Login page allows users to authenticate using their Student ID or email address and password. Users must successfully authenticate before accessing the protected Student Profile functionality.
+
+---
+
+## 3. Authentication
+
+The application uses **Supabase Authentication** to manage user login and sessions.
+
+The login process follows:
+
+**Login → Authentication → Student Profile**
+
+1. The user enters their Student ID or email address and password.
+2. If a Student ID is entered, the application retrieves the associated email address.
+3. The credentials are sent to Supabase Authentication.
+4. If authentication is successful, the user is redirected to the Student Profile.
+5. If the credentials are incorrect, an error message is displayed and access is denied.
+
+Passwords and other credentials are not included in the source code or README.
+
+---
+
+## 4. Student Profile Management
+
+After authentication, the student can view their profile information retrieved from the database.
+
+The Edit Profile feature allows the authenticated student to modify:
+
+* Full Name
+* Course / Program
+* Year Level
+* About Me
+* Skills
+
+The **Save** button sends the updated information to the database and displays a confirmation message.
+
+The **Cancel** button exits the editing form without saving the changes.
+
+The student can also use the **Change Profile Picture** function to capture a new image using the device camera.
+
+The **Logout** button signs the user out of the application and returns them to the Login page.
+
+---
+
+## 5. Database Integration
+
+The application uses **Supabase PostgreSQL** as its database.
+
+Student profile information stored in the `profiles` table includes:
+
+* Student ID
+* Email
+* Name
+* Course
+* Year Level
+* About
+* Skills
+* Profile Picture / Image Data
+
+Each profile is associated with an authenticated Supabase user through their unique user ID.
+
+After authentication, the application retrieves the student's profile from the database instead of relying only on hard-coded profile information.
+
+---
+
+## 6. API / Backend
+
+The Cordova application communicates with Supabase through its authentication and data APIs using the Supabase JavaScript client.
+
+The basic architecture is:
+
+**Cordova Application → Supabase API / Backend → PostgreSQL Database**
+
+The Cordova application sends authentication and database requests through the Supabase API. Supabase then handles authentication and communication with the PostgreSQL database.
+
+The application does not directly connect to the PostgreSQL database using database credentials.
+
+---
+
+## 7. CRUD Operations
+
+The application demonstrates the four basic CRUD operations:
+
+### Create
+
+A student profile record can be created in the `profiles` database table.
+
+### Read
+
+After authentication, the student's profile information is retrieved from the database and displayed in the application.
+
+### Update
+
+The Edit Profile feature allows the student to modify their profile information and save the changes to the database. The profile picture can also be updated.
+
+### Delete
+
+A separate test profile was created for demonstrating the Delete operation and was then removed from the database.
+
+---
+
+## 8. Camera Integration
+
+The camera functionality introduced in Activity 6 is retained in Activity 7.
+
+The **Change Profile Picture** function uses the Cordova Camera Plugin to access the Android device camera.
+
+The camera workflow is:
+
+1. The user selects Change Profile Picture.
+2. The Android camera opens.
+3. The user captures a photo.
+4. The captured image is displayed as the new profile picture.
+5. The image data is saved to the student's profile in the database.
+
+The captured profile picture can be retrieved again after logging out and logging back in.
+
+---
+
+## 9. Data Persistence
+
+Activity 7 uses the Supabase database to persist student profile information.
+
+When profile information is updated, the changes are saved to the database.
+
+The saved information remains available when:
+
+* The application is closed.
+* The application is restarted.
+* The user logs out.
+* The user logs in again.
+
+After logging in again, the application retrieves the student's profile from the database and displays the previously saved information.
+
+The profile picture is also stored in the database and remains available after logout and login.
+
+The existing `localStorage` functionality from previous activities is also retained.
+
+---
+
+## 10. Responsive Design
+
+The application retains the responsive design developed in the previous activities.
+
+The Student Profile application is designed to work across:
+
+* **Desktop**
+* **Tablet**
+* **Mobile**
+
+CSS media queries and flexible layouts are used to adjust the page layout, navigation, spacing, and text sizes for different screen widths.
+
+---
+
+## 11. Security
+
+The application uses Supabase Authentication to handle user authentication and passwords.
+
+Security measures include:
+
+* Passwords are not stored as plain text in the application database.
+* Database passwords and credentials are not included in the source code.
+* Secret or service-role keys are not included in the public repository.
+* The frontend uses a Supabase publishable key.
+* Authentication is handled through Supabase.
+* Row Level Security (RLS) is enabled on the `profiles` table.
+* Database policies restrict profile operations to the authenticated user's own profile.
+* Authentication is checked before protected profile information is retrieved or modified.
+
+No actual passwords or sensitive credentials are included in this README.
+
+---
+
+## 12. How to Run
+
+### Requirements
+
+* Node.js and npm
+* Apache Cordova
+* Android Studio
+* Android SDK
+* JDK
+* Android device or emulator
+* Internet connection
+
+### Steps
+
+1. Clone or download the repository.
+2. Open the project folder in a terminal.
+3. Run `npm install` if required.
+4. Make sure the Android SDK and JDK are configured.
+5. Connect an Android device with USB debugging enabled or start an Android emulator.
+6. Prepare the Android platform if needed:
+
+```cmd
+cordova prepare android
+```
+
+7. Build and run the application:
+
+```cmd
+cordova run android
+```
+
+The application opens on the Login page.
+
+The Supabase project URL and publishable key are configured in the application's frontend configuration file. No secret or service-role key is included in the public repository.
+
+---
+
+## 13. Test Accounts
+
+A separate demonstration account was created for testing the application's authentication and profile functionality.
+
+**Student ID:** `DEMO-001`
+**Email:** `demo.student@gmail.com`
+
+The account password is intentionally not included in the README or source code.
+
+---
+
+## 14. Application Screenshots
+
+### Login Page
+
+![Act 7 - Login & Logout.jpg](www/img/Act%207%20-%20Login%20%26%20Logout.jpg)
+
+### Successful Login
+
+![Act 7 - Login Succesful.jpg](www/img/Act%207%20-%20Login%20Succesful.jpg)
+
+### Student Profile
+
+![Act 7 - Student Profile.jpg](www/img/Act%207%20-%20Student%20Profile.jpg)
+
+### Edit Profile
+
+![Act 7 - Edit profile.jpg](www/img/Act%207%20-%20Edit%20profile.jpg)
+
+### Updated Profile
+
+![Act 7 - Updated Profile.jpg](www/img/Act%207%20-%20Updated%20Profile.jpg)
+
+### Camera
+
+![Act 7 - Camera.jpg](www/img/Act%207%20-%20Camera.jpg)
+
+### Logout
+
+![Act 7 - Login & Logout.jpg](www/img/Act%207%20-%20Login%20%26%20Logout.jpg)
+
+### Database-Related Functionality
+
+![Act 7 - Database.png](www/img/Act%207%20-%20Database.png)
+
+---
+
+## Activity 7 Technologies
+
+* HTML5
+* CSS3
+* JavaScript
+* Apache Cordova
+* Android
+* Supabase Authentication
+* Supabase PostgreSQL
+* Supabase Data API
+* Cordova Camera Plugin
+* localStorage
+* Git and GitHub
+
+

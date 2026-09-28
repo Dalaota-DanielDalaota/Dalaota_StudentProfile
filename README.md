@@ -1052,7 +1052,7 @@ A separate demonstration account was created for testing the application's authe
 
 **Student ID:** `DEMO-001`
 **Email:** `demo.student@gmail.com`
-**Password:** `hello123`
+
 
 The account password is intentionally not included in the README or source code.
 

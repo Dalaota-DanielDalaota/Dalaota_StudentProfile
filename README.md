@@ -1046,16 +1046,205 @@ The Supabase project URL and publishable key are configured in the application's
 
 ---
 
-## 13. Test Accounts
+## 13. Supabase Database Setup and App Connection
 
-A separate demonstration account was created for testing the application's authentication and profile functionality.
+This section documents how to recreate the cloud database, connect the Cordova Student Profile application to a new Supabase project, and run the Android application on either a physical Android device or an Android emulator.
 
-**Student ID:** `DEMO-001`
-**Email:** `demo.student@gmail.com`
+#### 1. Create a Supabase Project
 
+1. Open [Supabase](https://supabase.com/) and create a new project.
+2. Wait until the project is ready.
+3. Open **SQL Editor** in the Supabase Dashboard.
+4. Run the SQL script below to create the profile table, row-level security policies, and Student ID lookup function.
 
-The account password is intentionally not included in the README or source code.
+#### 2. Create the Database Table and Security Policies
 
+```sql
+CREATE TABLE public.profiles (
+    id uuid PRIMARY KEY REFERENCES auth.users(id),
+    student_id text NOT NULL UNIQUE,
+    name text NOT NULL,
+    course text NOT NULL,
+    year_level integer NOT NULL,
+    about text,
+    skills text,
+    profile_picture text,
+    email text UNIQUE
+);
+
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON TABLE public.profiles TO authenticated;
+
+CREATE POLICY "Users can view their own profile"
+ON public.profiles FOR SELECT TO authenticated
+USING (auth.uid() = id);
+
+CREATE POLICY "Users can create their own profile"
+ON public.profiles FOR INSERT TO authenticated
+WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Users can update their own profile"
+ON public.profiles FOR UPDATE TO authenticated
+USING (auth.uid() = id)
+WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Users can delete their own profile"
+ON public.profiles FOR DELETE TO authenticated
+USING (auth.uid() = id);
+
+CREATE OR REPLACE FUNCTION public.get_email_by_student_id(
+    student_id_input text
+)
+RETURNS text
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path TO 'public'
+AS $function$
+    SELECT email
+    FROM public.profiles
+    WHERE student_id = student_id_input
+    LIMIT 1;
+$function$;
+
+GRANT EXECUTE
+ON FUNCTION public.get_email_by_student_id(text)
+TO anon, authenticated;
+```
+
+The `profiles` table stores each student's information and links each profile to its corresponding Supabase Authentication user through the `id` UUID.
+
+#### 3. Create an Authentication User and Profile
+
+1. In the Supabase Dashboard, open **Authentication → Users**.
+2. Create a test user with an email and password.
+3. Copy the user's UUID.
+4. Open **SQL Editor** and insert a matching row into `public.profiles`.
+
+Replace the placeholders below with the UUID and email of the user you created.
+
+```sql
+INSERT INTO public.profiles (
+    id,
+    student_id,
+    name,
+    course,
+    year_level,
+    about,
+    skills,
+    profile_picture,
+    email
+)
+VALUES (
+    'PASTE-AUTH-USER-UUID-HERE',
+    'TEST-001',
+    'Test Student',
+    'BS Information Technology',
+    3,
+    'Testing the student profile application.',
+    'HTML, CSS, JavaScript, Git, Android Studio',
+    NULL,
+    'PASTE-TEST-EMAIL-HERE'
+);
+```
+
+The UUID in `profiles.id` must match the UUID of the corresponding Supabase Authentication user. The email must also match the email used to create that user.
+
+#### 4. Connect the Cordova Application to Supabase
+
+1. Open `www/supabase-config.js` in the project.
+2. In the Supabase Dashboard, find the project's URL and publishable key in its connection settings.
+3. Replace the existing URL and key with the values from the new project.
+
+```javascript
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+```
+**Prerequisites**
+
+- Node.js and npm
+- Cordova CLI
+- Android Studio and the Android SDK
+- A compatible Java JDK and Gradle setup for the project's Android build
+- A physical Android device or Android emulator
+- An internet connection to access Supabase
+
+Open a terminal in the project's root directory and run:
+
+```bash
+cordova prepare android
+```
+
+This prepares the Android platform using the project's Cordova configuration and application files.
+
+#### 6. Run on a Physical Android Device
+
+The application was tested on a physical Android phone.
+
+1. Enable **Developer Options** and **USB debugging** on the phone.
+2. Connect the phone to the computer using a USB cable.
+3. Ensure that the computer detects the connected device.
+4. In the project's terminal, run:
+
+```bash
+cordova run android --device
+```
+
+Cordova builds, installs, and launches the Android application on the connected device.
+
+The phone must have internet access to communicate with the Supabase cloud project.
+
+#### 7. Run on an Android Emulator
+
+The application can also be launched in an Android emulator through Android Studio.
+
+1. Open the project or Android platform project in Android Studio.
+2. Open **Tools → Device Manager**.
+3. Create a virtual device if one is not already available.
+4. Select an appropriate Android system image and download it if prompted.
+5. Start the emulator and wait until Android finishes booting.
+6. Return to the terminal in the Cordova project directory.
+7. Run:
+
+```bash
+cordova run android
+```
+
+Cordova should build, install, and launch the application in the running emulator.
+
+If the command cannot detect the emulator, confirm that it is running and recognized by the Android development tools. If the build reports a missing Java, SDK, or Gradle configuration, resolve the environment issue before trying again.
+
+The emulator must also have internet access so the application can connect to Supabase.
+
+#### 8. Test the Application
+
+Use the test account created in Step 3 to perform the following checks on the physical device or emulator:
+
+- **Login:** Sign in using the test user's email and password. Student ID login can also be tested using the Student ID associated with the profile.
+- **View profile:** Confirm that the profile information loads from Supabase.
+- **Edit profile:** Change profile information, save it, and verify that the updated values appear in the `profiles` table.
+- **Change profile picture:** Take a picture using the device camera and verify that the `profile_picture` column contains the saved image data.
+- **Logout:** Confirm that the application returns to the login screen.
+- **Protected profile access:** Attempt to open `index.html` without an authenticated user and confirm that the application redirects to login.
+- **Persistence:** Log in again and confirm that the updated profile information and picture remain available.
+
+These checks verify authentication, database updates, picture persistence, logout behavior, and retrieval of saved profile information.
+
+#### 9. Database and Security Notes
+
+The application uses Supabase Authentication and the Supabase Data API to communicate with a PostgreSQL database hosted in the cloud. The `profiles` table uses Row Level Security policies to restrict profile operations to the authenticated user whose UUID matches the profile's `id`.
+
+Profile pictures are stored as Base64-encoded image data in the `profile_picture` text column. This implementation does not require a Supabase Storage bucket.
+
+The `get_email_by_student_id` function returns an email address for a supplied Student ID before authentication. This lookup behavior has privacy implications and should be reviewed before using the application in production.
+
+A new Supabase project requires its own Authentication users and matching profile rows. Existing users and data from another project are not automatically transferred.
 ---
 
 ## 14. Application Screenshots
